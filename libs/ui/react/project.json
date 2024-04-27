@@ -1,0 +1,22 @@
+{
+  "name": "ui-react",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ui/react/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project ui-react --web",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+
+    "typecheck": {
+      "command": "tsc --project libs/ui/react/tsconfig.lib.json"
+    },
+
+    "format": {
+      "command": "prettier --write \"libs/ui/react/src/**/*.{ts,tsx,js,jsx,css,scss,json,md}\""
+    }
+  }
+}

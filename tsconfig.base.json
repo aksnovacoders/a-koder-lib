@@ -1,0 +1,24 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "declaration": false,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "target": "ES2015",
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "allowJs": true,
+    "paths": {
+      "@a-koder-lib/ui-react": ["libs/ui/react/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules"]
+}
