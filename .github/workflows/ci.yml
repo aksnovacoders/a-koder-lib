@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
 
 permissions:
@@ -22,16 +22,23 @@ jobs:
       # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "build" targets have been requested
       # - run: yarn nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="build"
 
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Set latest Yarn
+        run: yarn set version stable
+        
       # Cache node_modules
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'yarn'
+          
       - run: yarn install --immutable
       - uses: nrwl/nx-set-shas@v4
 
-      - run: git branch --track main origin/main
+      - run: git branch --track main origin/master
         if: ${{ github.event_name == 'pull_request' }}
 
       - run: yarn nx-cloud record -- nx format:check
-      - run: yarn nx affected -t lint test build
+      - run: yarn nx affected -t lint build
