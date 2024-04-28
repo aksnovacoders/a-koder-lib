@@ -4,20 +4,24 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "nx": "npx nx",
     "preinstall": "npx only-allow yarn",
     "format": "nx format:write",
-    "pd": "npx nx show project $0 --web"
+    "pd": "npx nx show project $0 --web",
+    "upgrade-self": "yarn set version latest && yarn",
+    "// upgrade-nx": "yarn nx migrate latest && yarn && yarn nx migrate --run-migrations --if-exists",
+    "prepare": "husky"
   },
   "dependencies": {
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-is": "18.2.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-is": "18.3.1",
     "styled-components": "5.3.6"
   },
   "devDependencies": {
     "@babel/core": "^7.24.4",
     "@babel/preset-react": "^7.24.1",
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "@nx/eslint": "18.3.4",
     "@nx/eslint-plugin": "18.3.4",
     "@nx/js": "18.3.4",
@@ -36,23 +40,26 @@
     "@swc-node/register": "~1.8.0",
     "@swc/core": "~1.3.85",
     "@swc/helpers": "~0.5.2",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/node": "18.16.9",
     "@types/react": "18.2.33",
     "@types/react-dom": "18.2.14",
     "@types/react-is": "18.2.2",
     "@types/styled-components": "5.1.26",
-    "@typescript-eslint/eslint-plugin": "^7.3.0",
-    "@typescript-eslint/parser": "^7.3.0",
-    "@vitejs/plugin-react": "^4.2.0",
-    "@vitest/ui": "^1.3.1",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/ui": "^1.5.2",
     "babel-plugin-styled-components": "1.10.7",
     "eslint": "~8.57.0",
-    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jsx-a11y": "6.7.1",
+    "eslint-plugin-jsx-a11y": "6.8.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.2",
+    "husky": "^9.0.11",
     "jsdom": "~22.1.0",
+    "lint-staged": "^15.2.2",
     "nx": "18.3.4",
     "prettier": "^3.2.5",
     "storybook": "^7.5.3",
@@ -60,7 +67,15 @@
     "typescript": "~5.4.5",
     "vite": "~5.2.10",
     "vite-plugin-dts": "~3.9.0",
-    "vitest": "^1.3.1"
+    "vitest": "^1.5.2"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --max-warnings=0 --no-ignore"
+    ],
+    "**/*.{js,jsx,ts,tsx,html,json,css,scss,md,mdx}": [
+      "prettier -write"
+    ]
   },
   "engines": {
     "node": ">=20.10.0",

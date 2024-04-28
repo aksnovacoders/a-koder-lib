@@ -12,7 +12,10 @@ export default defineConfig({
   plugins: [
     react(),
     nxViteTsPaths(),
-    dts({ entryRoot: 'src', tsconfigPath: path.join(__dirname, 'tsconfig.lib.json') }),
+    dts({
+      entryRoot: 'src',
+      tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
+    }),
   ],
 
   // Uncomment this if you are using workers.
@@ -25,6 +28,7 @@ export default defineConfig({
   build: {
     outDir: '../../../dist/libs/ui/react',
     reportCompressedSize: true,
+    emptyOutDir: true,
     commonjsOptions: {
       transformMixedEsModules: true,
     },
@@ -35,7 +39,7 @@ export default defineConfig({
       fileName: 'index',
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
-      formats: ['es', 'cjs'],
+      formats: ['es'],
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.

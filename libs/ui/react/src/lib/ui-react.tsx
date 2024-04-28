@@ -1,13 +1,10 @@
 import styled from 'styled-components'
 
-/* eslint-disable-next-line */
-export interface UiReactProps {}
-
 const StyledUiReact = styled.div`
   color: pink;
 `
 
-export function UiReact(props: UiReactProps) {
+export function UiReact() {
   return (
     <StyledUiReact>
       <h1>Welcome to UiReact!</h1>

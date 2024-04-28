@@ -3,7 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/ui/react/src",
   "projectType": "library",
-  "tags": [],
+  "tags": ["ui", "react", "scope:react"],
   "// targets": "to see all targets run: nx show project ui-react --web",
   "targets": {
     "lint": {
@@ -17,6 +17,23 @@
 
     "format": {
       "command": "prettier --write \"libs/ui/react/src/**/*.{ts,tsx,js,jsx,css,scss,json,md}\""
+    },
+
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/ui/react"
+      },
+      "configurations": {
+        "production": {
+          "mode": "production"
+        },
+        "development": {
+          "mode": "development"
+        }
+      }
     }
   }
 }
