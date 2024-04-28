@@ -13,8 +13,9 @@ permissions:
 jobs:
   main:
     runs-on: ubuntu-latest
+    environment: production
     env:
-      NX_CLOUD_ACCESS_TOKEN: ${{ NX_ENV.NX_CLOUD_ACCESS_TOKEN }}
+      NX_CLOUD_ACCESS_TOKEN: ${{ vars.NX_CLOUD_ACCESS_TOKEN }}
     steps:
       - run: |
           echo NX_CLOUD_ACCESS_TOKEN=$NX_CLOUD_ACCESS_TOKEN
