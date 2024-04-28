@@ -17,8 +17,6 @@ jobs:
     env:
       NX_CLOUD_ACCESS_TOKEN: ${{ vars.NX_CLOUD_ACCESS_TOKEN }}
     steps:
-      - run: |
-          echo NX_CLOUD_ACCESS_TOKEN=$NX_CLOUD_ACCESS_TOKEN
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -32,15 +30,18 @@ jobs:
 
       - name: Set latest Yarn
         run: yarn set version stable
-        
+
       # Cache node_modules
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'yarn'
-          
+
       - run: yarn install --immutable
+
       - uses: nrwl/nx-set-shas@v4
+        with:
+          main-branch-name: master
 
       - run: git branch --track main origin/master
         if: ${{ github.event_name == 'pull_request' }}
