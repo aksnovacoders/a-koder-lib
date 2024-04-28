@@ -8,6 +8,7 @@ export function UiReact() {
   return (
     <StyledUiReact>
       <h1>Welcome to UiReact!</h1>
+      <p>Start editing to see some magic happen</p>
     </StyledUiReact>
   )
 }

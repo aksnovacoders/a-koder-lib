@@ -74,7 +74,7 @@
       "eslint --max-warnings=0 --no-ignore"
     ],
     "**/*.{js,jsx,ts,tsx,html,json,css,scss,md,mdx}": [
-      "prettier -write"
+      "prettier -w"
     ]
   },
   "engines": {
