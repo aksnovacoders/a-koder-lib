@@ -49,4 +49,4 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
 
       - run: yarn nx-cloud record -- nx format:check
-      - run: yarn nx affected --base=master -t lint build
+      - run: yarn nx affected -t lint build
