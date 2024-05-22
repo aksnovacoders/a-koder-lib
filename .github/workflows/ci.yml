@@ -36,6 +36,8 @@ jobs:
         with:
           node-version: 20
           cache: 'yarn'
+          cache-dependency-path: yarn.lock
+          always-auth: true
 
       - run: yarn install --immutable
 
