@@ -17,7 +17,7 @@
     "cq:eslint:fix": "./tools/nx-run-for-branch.sh lint --fix",
     "cq:prettier": "./tools/nx-run-for-branch.sh prettier",
     "release": "./tools/release.sh",
-    "setup": "GIT_TOKEN=$(gh auth token) yarn && yarn build:configs && husky"
+    "setup": "GH_TOKEN=$(gh auth token) yarn && yarn build:configs && husky"
   },
   "dependencies": {
     "react": "18.3.1",

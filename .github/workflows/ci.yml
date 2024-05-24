@@ -45,10 +45,11 @@ jobs:
           cache: 'yarn'
           cache-dependency-path: yarn.lock
           always-auth: true
+          registry-url: 'https://npm.pkg.github.com'
 
       - name: Install dependencies
         env:
-          GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: yarn install --immutable
 
       - name: Check code quality
@@ -68,17 +69,11 @@ jobs:
             @jscutlery/semv
           allowed-ranges: ^
 
-      - uses: actions/setup-node@v4
-        if: github.ref_name == 'master' || false
-        with:
-          cache: 'yarn'
-          node-version: 20
-          registry-url: 'https://npm.pkg.github.com'
-
       - name: Release
         if: github.ref_name == 'master' || false
         env:
           NODE_AUTH_TOKEN: ${{ secrets.FULL_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           git config user.name github-actions
