@@ -39,17 +39,50 @@
     "release": {
       "executor": "@jscutlery/semver:version",
       "options": {
+        "baseBranch": "master",
         "commitMessageFormat": "chore({projectName}): release version ${version} [skip ci]",
         "commitParserOptions": {
           "headerPattern": "^([A-Z]{2,}-\\d{1,5}):? (build|chore|ci|docs|feat|fix|infra|perf|refactor|revert|style|test)(?:\\(([\\w-]+)\\))?\\:? (.+)$",
           "headerCorrespondence": ["ticketReference", "type", "scope", "subject"]
         },
+        "preset": "conventionalcommits",
         "noVerify": true,
-        "postTargets": ["yara-eu-react:build-release", "yara-eu-react:publish"],
+        "postTargets": [
+          "ui-react:build-release",
+          "ui-react:github-publish",
+          "ui-react:npm-publish"
+        ],
         "skipCommitTypes": ["chore", "ci", "docs", "infra", "refactor", "test"],
-        "tagPrefix": "release-yara-eu-react-",
+        "tagPrefix": "release-{projectName}@",
         "trackDeps": true
       }
+    },
+
+    "build-release": {
+      "command": "nx run ui-react:build"
+    },
+
+    "publish": {
+      "command": "node tools/scripts/publish.mjs ${projectName} ${version}",
+      "dependsOn": ["build"]
+    },
+
+    "github-publish": {
+      "executor": "@jscutlery/semver:github",
+      "options": {
+        "tag": "{tag}",
+        "notes": "{notes}"
+      },
+      "dependsOn": ["build"]
+    },
+
+    "npm-publish": {
+      "executor": "ngx-deploy-npm:deploy",
+      "options": {
+        "distFolderPath": "dist/libs/ui/react",
+        "access": "public"
+      },
+      "dependsOn": ["build"]
     }
   }
 }

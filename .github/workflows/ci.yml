@@ -1,29 +1,35 @@
-name: CI
+name: CI - Code Quality / Release
 
 on:
   push:
     branches:
       - master
+
   pull_request:
 
-permissions:
-  actions: read
-  contents: read
+  workflow_dispatch:
+    inputs:
+      skip_checks:
+        description: 'Skip code quality checks'
+        required: false
+        default: true
+        type: boolean
 
 jobs:
-  main:
+  release:
     runs-on: ubuntu-latest
+    if: |
+      !contains(github.event.head_commit.message , '[skip ci]') &&
+      !(github.event_name == 'pull_request' && startsWith(github.head_ref, 'renovate/'))
     environment: production
     env:
-      NX_CLOUD_ACCESS_TOKEN: ${{ vars.NX_CLOUD_ACCESS_TOKEN }}
+      NX_BASE: origin/${{ github.event_name == 'pull_request' && github.base_ref || 'master' }}
+      TARGET_BRANCH: origin/${{ github.event_name == 'pull_request' && github.base_ref || 'master' }}
+      # NX_CLOUD_ACCESS_TOKEN: ${{ vars.NX_CLOUD_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      # Connect your workspace on nx.app and uncomment this to enable task distribution.
-      # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "build" targets have been requested
-      # - run: yarn nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="build"
 
       - name: Enable Corepack
         run: corepack enable
@@ -38,15 +44,47 @@ jobs:
           cache: 'yarn'
           cache-dependency-path: yarn.lock
           always-auth: true
+          registry-url: 'https://npm.pkg.github.com'
 
-      - run: yarn install --immutable
+      - name: Install dependencies
+        env:
+          GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: yarn install --immutable
 
-      - uses: nrwl/nx-set-shas@v4
+      - name: Check code quality
+        if: ${{ !inputs.skip_checks }}
+        run: yarn cq
+
+      - uses: ExpediaGroup/package-json-validator@v1.6.0
+        if: ${{ !inputs.skip_checks }}
         with:
-          main-branch-name: master
+          rules: |
+            ranges
+            tags
+          dependency-types: |
+            dependencies
+            devDependencies
+          ignore-packages: |
+            @jscutlery/semv
 
-      - run: git branch --track master origin/master
-        if: ${{ github.event_name == 'pull_request' }}
+      - name: Release
+        if: github.ref_name == 'master' || false
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          yarn release
 
-      - run: yarn nx-cloud record -- nx format:check
-      - run: yarn nx affected -t lint build
+      - name: Print install strings
+        if: github.ref_name == 'master' || false
+        run: ./tools/install-strings-list.sh
+      # - uses: nrwl/nx-set-shas@v4
+      #   with:
+      #     main-branch-name: master
+
+      # - run: git branch --track master origin/master
+      #   if: ${{ github.event_name == 'pull_request' }}
+
+      # - run: yarn nx-cloud record -- nx format:check
+      # - run: yarn nx affected -t lint build

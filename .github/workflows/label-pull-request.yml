@@ -1,0 +1,19 @@
+name: Add Labels to Pull Request
+
+on:
+  pull_request_target:
+
+jobs:
+  add-label:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Label the PR
+        id: label-the-PR
+        uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          sync-labels: true
