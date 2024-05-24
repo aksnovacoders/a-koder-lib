@@ -1,6 +1,6 @@
 {
   "name": "@a-koder-lib/ui-react",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "./index.js",
   "types": "./index.d.ts",
   "type": "module",
@@ -9,5 +9,11 @@
       "import": "./index.mjs",
       "require": "./index.js"
     }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "git+https://github.com/aksnovacoders/a-koder-lib.git"
   }
 }

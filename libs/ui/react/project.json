@@ -34,6 +34,22 @@
           "mode": "development"
         }
       }
+    },
+
+    "release": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "commitMessageFormat": "chore({projectName}): release version ${version} [skip ci]",
+        "commitParserOptions": {
+          "headerPattern": "^([A-Z]{2,}-\\d{1,5}):? (build|chore|ci|docs|feat|fix|infra|perf|refactor|revert|style|test)(?:\\(([\\w-]+)\\))?\\:? (.+)$",
+          "headerCorrespondence": ["ticketReference", "type", "scope", "subject"]
+        },
+        "noVerify": true,
+        "postTargets": ["yara-eu-react:build-release", "yara-eu-react:publish"],
+        "skipCommitTypes": ["chore", "ci", "docs", "infra", "refactor", "test"],
+        "tagPrefix": "release-yara-eu-react-",
+        "trackDeps": true
+      }
     }
   }
 }
