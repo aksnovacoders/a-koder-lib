@@ -21,7 +21,7 @@ if [ "$BRANCH_NAME" = "master" ]; then
         RELEASE_BRANCH_NAME="release-$(date +%s)"
         git checkout -b "$RELEASE_BRANCH_NAME"
 
-        yarn nx affected --target=release --parallel=false --baseBranch="$RELEASE_BRANCH_NAME" --nxBail=true --target=1.2.0
+        yarn nx affected --target=release --parallel=false --baseBranch="$RELEASE_BRANCH_NAME" --nxBail=true
 
         git checkout master
         git pull origin master
