@@ -66,6 +66,7 @@ jobs:
             devDependencies
           ignore-packages: |
             @jscutlery/semv
+          allowed-ranges: ^
 
       - name: Release
         if: github.ref_name == 'master' || false
