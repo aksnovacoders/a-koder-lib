@@ -12,6 +12,7 @@
     "prepare": "husky",
     "semantic-release": "semantic-release",
     "cmt": "npx cz",
+    "cq": "yarn cq:eslint && yarn cq:prettier",
     "cq:eslint": "./tools/nx-run-for-branch.sh lint --max-warnings=0",
     "cq:eslint:fix": "./tools/nx-run-for-branch.sh lint --fix",
     "cq:prettier": "./tools/nx-run-for-branch.sh prettier",
