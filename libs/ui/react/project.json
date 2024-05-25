@@ -55,7 +55,7 @@
     },
 
     "publish": {
-      "command": "node tools/scripts/publish.mjs ${projectName} ${version}",
+      "command": "node tools/scripts/publish.mjs ui-react ${version}",
       "dependsOn": ["build"]
     },
 
