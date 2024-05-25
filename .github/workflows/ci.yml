@@ -44,8 +44,7 @@ jobs:
           node-version: 20
           cache: 'yarn'
           cache-dependency-path: './yarn.lock'
-          registry-url: https://npm.pkg.github.com/
-          scope: '@aksnovacoders'
+          registry-url: https://npm.pkg.github.com
 
       - name: Install dependencies
         env:
