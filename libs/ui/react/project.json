@@ -47,7 +47,7 @@
         },
         "preset": "conventionalcommits",
         "noVerify": true,
-        "postTargets": ["ui-react:github-publish", "ui-react:npm-publish"],
+        "postTargets": ["ui-react:publish", "ui-react:npm-publish"],
         "skipCommitTypes": ["chore", "ci", "docs", "infra", "refactor", "test"],
         "tagPrefix": "release-{projectName}@",
         "trackDeps": true
