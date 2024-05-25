@@ -103,7 +103,8 @@
   },
   "packageManager": "yarn@4.2.2",
   "repository": {
-    "url": "git+https://github.com/aksnovacoders/a-koder-lib.git"
+    "type": "git",
+    "url": "https://github.com/aksnovacoders/a-koder-lib.git"
   },
   "config": {
     "commitizen": {

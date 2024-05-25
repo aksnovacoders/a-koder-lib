@@ -44,6 +44,8 @@ jobs:
           node-version: 20
           cache: 'yarn'
           cache-dependency-path: './yarn.lock'
+          registry-url: https://npm.pkg.github.com/
+          scope: '@aksnovacoders'
 
       - name: Install dependencies
         env:
@@ -66,13 +68,6 @@ jobs:
           ignore-packages: |
             @jscutlery/semv
           allowed-ranges: ^
-
-      - uses: actions/setup-node@v4
-        if: github.ref_name == 'master' || false
-        with:
-          cache: 'yarn'
-          node-version: 20
-          registry-url: 'https://npm.pkg.github.com'
 
       - name: Release
         if: github.ref_name == 'master' || false
