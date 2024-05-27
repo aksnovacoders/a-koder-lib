@@ -52,6 +52,7 @@ export default defineConfig({
         'react',
         'react-dom',
         'react/jsx-runtime',
+        'styled-components',
         // ...Object.keys(pkg.dependencies).map(dep => new RegExp(`^${dep}(/|$)`)),
       ],
       // input: Object.fromEntries(
