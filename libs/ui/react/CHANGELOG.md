@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.5.0](https://github.com/aksnovacoders/a-koder-lib/compare/release-ui-react@1.4.0...release-ui-react@1.5.0) (2024-05-27)
+
+
+### Features
+
+* modified vite config and remove deps ([f40f811](https://github.com/aksnovacoders/a-koder-lib/commit/f40f811f8077ebd6295d6930a4ae561211eef17e))
+
 ## [1.4.0](https://github.com/aksnovacoders/a-koder-lib/compare/release-ui-react@1.3.0...release-ui-react@1.4.0) (2024-05-25)
 
 
