@@ -2,6 +2,8 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [1.5.1](https://github.com/aksnovacoders/a-koder-lib/compare/release-ui-react@1.5.0...release-ui-react@1.5.1) (2024-06-17)
+
 ## [1.5.0](https://github.com/aksnovacoders/a-koder-lib/compare/release-ui-react@1.4.0...release-ui-react@1.5.0) (2024-05-27)
 
 
