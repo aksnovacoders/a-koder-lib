@@ -4,3 +4,4 @@
 /.yarn
 /.nx
 yarn.lock
+/.nx/workspace-data
